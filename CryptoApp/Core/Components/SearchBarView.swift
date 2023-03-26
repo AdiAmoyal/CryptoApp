@@ -36,7 +36,8 @@ struct SearchBarView: View {
                 )
         }
         .font(.headline)
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 12)
         .background(
             RoundedRectangle(cornerRadius: 25)
                 .fill(Color.theme.background)
