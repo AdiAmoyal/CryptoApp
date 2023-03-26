@@ -19,6 +19,7 @@ struct HomeView: View {
             
             VStack {
                 homeHeader
+                SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 
                 if !showPortfolio {
@@ -29,7 +30,7 @@ struct HomeView: View {
                         .transition(.move(edge: .trailing))
                 }
                 
-                Spacer()
+                Spacer(minLength: 0)
             }
         }
     }
