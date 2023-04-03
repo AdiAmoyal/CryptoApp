@@ -135,9 +135,7 @@ extension PortfolioView {
         HStack(spacing: 10) {
             Image(systemName: "checkmark")
                 .opacity(showCheckmark ? 1.0 : 0.0)
-            Button(action: {
-                
-            }, label: {
+            Button(action: saveBtnPressed, label: {
                 Text("Save".uppercased())
             })
             .opacity((selectedCoin != nil && selectedCoin?.currentHoldings != Double(quantityText)) ? 1.0 : 0.0)
@@ -155,11 +153,12 @@ extension PortfolioView {
         
         withAnimation(.easeIn) {
             showCheckmark = true
+            removeSelectedCoin()
         }
         
         UIApplication.shared.endEditing()
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation(.easeOut) {
                 showCheckmark = false
             }

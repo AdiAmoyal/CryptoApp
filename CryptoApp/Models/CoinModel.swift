@@ -66,7 +66,7 @@ struct CoinModel: Identifiable, Decodable {
     }
     
     var currentHoldingsValue: Double {
-        return (currentPrice ?? 0) * currentPrice
+        return (currentHoldings ?? 0) * currentPrice
     }
     
     var rank: Int {

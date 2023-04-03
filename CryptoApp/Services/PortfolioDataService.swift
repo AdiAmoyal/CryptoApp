@@ -18,7 +18,7 @@ class PortfolioDataService {
     
     init() {
         container = NSPersistentContainer(name: containerName)
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { (_, error) in
             if let error = error {
                 print("Error loading Core Data! \(error)")
             }
@@ -51,19 +51,6 @@ class PortfolioDataService {
         }
     }
     
-    private func save() {
-        do {
-            try container.viewContext.save()
-        } catch let error {
-            print("Error saving to Core Data. \(error)")
-        }
-    }
-    
-    private func applyChanges() {
-        save()
-        getPortfolio()
-    }
-    
     private func add(coin: CoinModel, amount: Double) {
         let entity = PortfolioEntity(context: container.viewContext)
         entity.coinId = coin.id
@@ -79,6 +66,19 @@ class PortfolioDataService {
     private func remove(entity: PortfolioEntity) {
         container.viewContext.delete(entity)
         applyChanges()
+    }
+    
+    private func save() {
+        do {
+            try container.viewContext.save()
+        } catch let error {
+            print("Error saving to Core Data. \(error)")
+        }
+    }
+    
+    private func applyChanges() {
+        save()
+        getPortfolio()
     }
     
 }
